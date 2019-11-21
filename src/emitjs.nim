@@ -26,7 +26,7 @@ proc tmpFile(data: string): string =
   echo staticExec("echo '" & data & "' >" & nimFileName)
   return nimFileName
 
-proc compileJavaScript(jsFile: string): string =
+proc compileToJavaScript(jsFile: string): string =
   var command = "nim js "
   when defined release: command = command & " -d:release "
   let (nimOutput, errCode) = gorgeEx(command & jsFile)
@@ -37,7 +37,7 @@ proc compileJavaScript(jsFile: string): string =
 
 proc emitJavaScript(jsInstructions: string): string =
   let nimFileName = tmpFile(jsInstructions)
-  echo compileJavaScript(nimFileName)
+  echo compileToJavaScript(nimFileName)
   let jsFile = splitFile(nimFileName)
   let jsFilePath = joinPath(jsFile.dir, jsFile.name & ".js")
   return staticRead(jsFilePath)
