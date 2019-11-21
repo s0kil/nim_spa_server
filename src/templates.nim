@@ -25,6 +25,9 @@ template htmlDocument*(body, script: string = ""): string =
       h.div(
         id = "root",
         body
+      ),
+      h.div(
+        id = "footer"
       )
     ),
     h.script(script)
