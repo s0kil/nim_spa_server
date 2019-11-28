@@ -21,7 +21,7 @@ template htmlDocument*(body, script: string = ""): string =
     h.head(
       h.meta(charset = "utf-8"),
       h.meta(name = "viewport", content = "width=device-width, initial-scale=1.0"),
-      h.title("Nim SPA Server"),
+      h.title("Nim SPA Server Side"),
       # DOCS : https://kbrsh.github.io/wing
       h.link(rel = "stylesheet", href = "https://cdn.jsdelivr.net/npm/wingcss@1.0.0-beta/dist/wing.min.css")
     ),
