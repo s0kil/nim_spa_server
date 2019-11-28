@@ -5,6 +5,7 @@ author        = "Daniel Sokil"
 description   = "Single Page Applications Running Server Side"
 license       = "MIT"
 srcDir        = "src"
+bin           = @["server"]
 
 # Dependencies
 

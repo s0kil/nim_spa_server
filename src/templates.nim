@@ -6,6 +6,8 @@ template navBar(): string =
       "Home Page",
       href = "/"
     ),
+    h.br(),
+    h.br(),
     h.a(
       "About Page",
       href = "about"
