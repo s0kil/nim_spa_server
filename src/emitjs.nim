@@ -5,20 +5,8 @@
 ]#
 
 import os, macros
-# import osproc
-# import tempfile
-
 
 type JSCompilerError = object of Exception
-
-# Write To Temporary File, And Return File Name
-#[
-proc tmpFile(data: string): string =
-  var (file, name) = mkstemp(suffix = ".nim", mode = fmWrite)
-  defer: file.close()
-  write(file, data)
-  return name
-]#
 
 proc tmpFile(data: string): string =
   const nimFileName = "/tmp/emmitJS.nim"
@@ -32,7 +20,8 @@ proc compileToJavaScript(jsFile: string): string =
   let (nimOutput, errCode) = gorgeEx(command & jsFile)
   echo "Hint: JavaScript Emitter\n"
   echo nimOutput
-  if errCode != 0: raise newException(JSCompilerError, "Failed To Compile Nim Into JavaScript")
+  if errCode != 0:
+    raise newException(JSCompilerError, "Failed To Compile Nim Into JavaScript")
   echo "\nHint: JavaScript Emitter Completed"
 
 proc emitJavaScript(jsInstructions: string): string =
