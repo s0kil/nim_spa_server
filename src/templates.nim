@@ -1,16 +1,17 @@
 from htmlgen as h import nil
 
 template navBar(): string =
-  h.div(
+  h.nav(
+    class = "nav",
     h.a(
       "Home Page",
-      href = "/"
+      href = "/",
+      class = "nav-item"
     ),
-    h.br(),
-    h.br(),
     h.a(
       "About Page",
-      href = "about"
+      href = "/about",
+      class = "nav-item"
     )
   )
 
@@ -21,6 +22,8 @@ template htmlDocument*(body, script: string = ""): string =
       h.meta(charset = "utf-8"),
       h.meta(name = "viewport", content = "width=device-width, initial-scale=1.0"),
       h.title("Nim SPA Server"),
+      # DOCS : https://kbrsh.github.io/wing
+      h.link(rel = "stylesheet", href = "https://cdn.jsdelivr.net/npm/wingcss@1.0.0-beta/dist/wing.min.css")
     ),
     h.body(
       navBar(),
