@@ -11,12 +11,12 @@ routes:
   get "/":
     resp htmlDocument(
       body = indexTemplate(),
-      # script = clientSocket()
+      script = clientSocket()
     )
   get "/about":
     resp htmlDocument(
       body = aboutTemplate("From Nim"),
-      # script = clientSocket()
+      script = clientSocket()
     )
   get "/ws":
     var ws = await newWebSocket(request)
