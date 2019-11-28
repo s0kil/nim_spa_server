@@ -1,22 +1,26 @@
 import emitjs
 
 proc clientSocket*(): string {.emitJS.} =
-  import dom, jsffi, times
+  import dom
+  import jsffi, times
 
-  from karax/kdom_impl import Node
+  from karax/kdom_impl import Node, Location, window
   import jswebsockets
 
   proc debug[T](x: T) {.importc: "console.log", varargs.}
+
+  let host = kdom_impl.window.location.host
+  let socketURL = "wss://" & host & "/ws"
 
   var latency: NanoSecondRange
   let root = document.getElementById("root")
   let footer = document.getElementById("footer")
 
-  var socket = newWebSocket("ws://localhost:8000/ws")
-  # var socket = newWebSocket("ws://192.168.254.72:8000/ws")
+  # var socket = newWebSocket("ws://localhost:8000/ws")
+  var socket = newWebSocket(socketURL)
   socket.onOpen = proc (e: Event) =
     footer.innerHTML = "WebSocket Open"
-    debug(e)
+    # debug(e)
   socket.onClose = proc (e: CloseEvent) = debug(e.reason)
   socket.onMessage =
     proc (e: MessageEvent) =
@@ -24,7 +28,7 @@ proc clientSocket*(): string {.emitJS.} =
       footer.innerHTML = "WebSocket Latency: " & $latency & " Nanoseconds";
       root.innerHTML = e.data
 
-  window.addEventListener("click",
+  dom.window.addEventListener("click",
     proc(e: Event) =
       e.preventDefault()
       let href = e.target.getAttribute("href");
@@ -35,4 +39,4 @@ proc clientSocket*(): string {.emitJS.} =
         # let path = window.location.host & "/" & href
         # window.history.pushState(newJsObject(), href, path);
   )
-  window.addEventListener("popstate", proc(e: Event) = debug(window.location))
+  dom.window.addEventListener("popstate", proc(e: Event) = debug(dom.window.location))

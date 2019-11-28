@@ -3,15 +3,21 @@ from htmlgen as h import nil
 template navBar(): string =
   h.nav(
     class = "nav",
-    h.a(
-      "Home Page",
-      href = "/",
-      class = "nav-item"
+    h.button(
+        class = "outline",
+        h.a(
+          "Home Page",
+          href = "/",
+          class = "nav-item"
+        ),
     ),
-    h.a(
-      "About Page",
-      href = "/about",
-      class = "nav-item"
+    h.button(
+        class = "outline",
+        h.a(
+          "About Page",
+          href = "/about",
+          class = "nav-item"
+        )
     )
   )
 

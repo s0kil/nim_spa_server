@@ -1,3 +1,4 @@
 h2o/h2o-*
 h2o/*.log
 h2o
+*.log
